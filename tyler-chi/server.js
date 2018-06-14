@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const express = require('express');
-
-const PORT = process.env.PORT || 3000;
+const pg = require('pg');
+const PORT = process.env.PORT || 9001;
 const app = express();
 
 // TODO: Install and require the NPM package pg and assign it to a variable called pg.
@@ -15,10 +15,10 @@ const app = express();
 // const conString = 'postgres://postgres:1234@localhost:5432/kilovolt'
 
 // Mac:
-// const conString = 'postgres://localhost:5432/kilovolt';
+const conString = 'postgres://localhost:5432/kilovolt';
 
 // TODO: Pass the conString into the Client constructor so that the new database interface instance has the information it needs
-const client = new pg.Client();
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
@@ -42,7 +42,7 @@ app.get('/new-article', (request, response) => {
 app.get('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to this route? Be sure to take into account how the request was initiated, how it was handled, and how the response was delivered. Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // PUT YOUR RESPONSE HERE
-  client.query('')
+  client.query('SELECT * FROM articles')
     .then(function(result) {
       response.send(result.rows);
     })
@@ -81,7 +81,7 @@ app.put('/articles/:id', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to this route? Be sure to take into account how the request was initiated, how it was handled, and how the response was delivered. Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // PUT YOUR RESPONSE HERE
 
-  let SQL = '';
+  let SQL = ``;
   let values = [];
 
   client.query(SQL, values)
@@ -113,7 +113,7 @@ app.delete('/articles', (request, response) => {
   // COMMENT: What number(s) of the full-stack-diagram.png image correspond to this route? Be sure to take into account how the request was initiated, how it was handled, and how the response was delivered. Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
   // PUT YOUR RESPONSE HERE
 
-  let SQL = '';
+  let SQL = conString;
   client.query(SQL)
     .then(() => {
       response.send('Delete complete')
@@ -129,6 +129,7 @@ loadDB();
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}!`);
+  console.log('ITS OVER 9000!!!!!!!!!!!!');
 });
 
 
