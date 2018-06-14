@@ -6,15 +6,7 @@
 
 Go into the **psql** shell and enter `SELECT COUNT(*) from articles;` to view the current number of records in the table. Then, in the browser console:
 
-```
-let newArticle = new Article({
-  title:'Flibbity goes Jibbiting',
-  author:'Flibbity Jibbit',
-  authorUrl:'flibbity.jibbit.com',
-  category:'jibbits',
-  publishedOn:'01-01-2217',
-  body:'Flibbity Jibbit and the Key Keeper'
-});
+`
 ```
 
 `newArticle.insertRecord();`

@@ -15,10 +15,10 @@ const app = express();
 // const conString = 'postgres://postgres:1234@localhost:5432/kilovolt'
 
 // Mac:
-// const conString = 'postgres://localhost:5432/kilovolt';
+const conString = 'postgres://localhost:5432/kilovolt';
 
 // TODO: Pass the conString into the Client constructor so that the new database interface instance has the information it needs
-const client = new pg.Client();
+const client = new pg.Client(conString);
 
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
